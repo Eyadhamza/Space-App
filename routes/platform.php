@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use App\Orchid\Screens\Category\CategoryEditScreen;
+use App\Orchid\Screens\Category\CategoryListScreen;
 use App\Orchid\Screens\Examples\ExampleCardsScreen;
 use App\Orchid\Screens\Examples\ExampleChartsScreen;
 use App\Orchid\Screens\Examples\ExampleFieldsAdvancedScreen;
@@ -10,6 +12,8 @@ use App\Orchid\Screens\Examples\ExampleLayoutsScreen;
 use App\Orchid\Screens\Examples\ExampleScreen;
 use App\Orchid\Screens\Examples\ExampleTextEditorsScreen;
 use App\Orchid\Screens\PlatformScreen;
+use App\Orchid\Screens\Post\PostEditScreen;
+use App\Orchid\Screens\Post\PostListScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
 use App\Orchid\Screens\User\UserEditScreen;
@@ -108,3 +112,28 @@ Route::screen('example-cards', ExampleCardsScreen::class)->name('platform.exampl
 Route::screen('example-advanced', ExampleFieldsAdvancedScreen::class)->name('platform.example.advanced');
 
 //Route::screen('idea', 'Idea::class','platform.screens.idea');
+
+
+
+Route::screen('posts', PostListScreen::class)
+    ->name('platform.posts.list')
+    ->breadcrumbs(function (Trail $trail) {
+        return $trail
+            ->parent('platform.index')
+            ->push('Posts', route('platform.posts.list'));
+    });
+Route::screen('post/modify/{post?}', PostEditScreen::class)
+    ->name('platform.posts.edit')
+    ->breadcrumbs(function (Trail $trail,$post = null) {
+        return $trail
+            ->parent('platform.posts.list')
+            ->push($post->title ?? 'Post', route('platform.posts.edit',$post->id ?? null));
+    });
+
+
+
+Route::screen('categories', CategoryListScreen::class)
+    ->name('platform.categories.list');
+
+Route::screen('categories/modify/{category?}', CategoryEditScreen::class)
+    ->name('platform.categories.edit');
