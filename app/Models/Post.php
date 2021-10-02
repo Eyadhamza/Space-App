@@ -29,7 +29,7 @@ class Post extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class)->select(['id','name','avatar']);
+        return $this->belongsTo(User::class)->select(['id','name']);
     }
     public function categories(): BelongsToMany
     {
