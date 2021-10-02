@@ -107,9 +107,10 @@ class PostEditScreen extends Screen
                     ->multiple()
                     ->title('Related Categories'),
 
-                Quill::make('post.description')
+                TextArea::make('post.description')
                     ->title('Description')
                     ->required()
+                    ->rows(6)
                     ->placeholder('Post description')
                     ->help('Specify The Post description.'),
 
