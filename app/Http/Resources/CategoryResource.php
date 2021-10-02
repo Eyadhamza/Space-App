@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 /** @mixin \App\Models\Category */
 class CategoryResource extends JsonResource
 {
-    public function toArray(Request $request)
+    public function toArray($request): array
     {
         return [
 

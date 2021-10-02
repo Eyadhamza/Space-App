@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class PostResource extends JsonResource
 {
-    public function toArray(Request $request)
+    public function toArray($request): array
     {
         return [
 
