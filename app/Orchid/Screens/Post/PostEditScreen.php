@@ -140,7 +140,9 @@ class PostEditScreen extends Screen
             'categories.' => 'nullable',
 
         ]);
-        $post->fill($request->get('post'));
+        $post->fill($request->get('post'))->fill([
+            'user_id' => auth()->user()->id
+        ]);
         $post->categories()->sync(request('post.categories'));
         $post->save();
 
