@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->seedUser();
-        $this->seedCategoryAndPosts();
+//        $this->seedCategoryAndPosts();
     }
     private function seedUser()
     {
