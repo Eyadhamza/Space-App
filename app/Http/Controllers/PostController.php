@@ -15,9 +15,9 @@ class PostController extends Controller
         $posts = PostResource::collection(Post::all());
 
         return $posts->additional([
-            'status' => response()->json()->isSuccessful() ? 'success' : 'failure',
-            'msg' => response()->json()->isSuccessful() ? '' : 'Something went wrong!',
-            'code' => response()->json()->getStatusCode()
+            'status' => 'success' ,
+            'msg' => '',
+            'code' => 200
         ]);
     }
 
@@ -32,11 +32,11 @@ class PostController extends Controller
             return [
                 'data' => [],
                 'status' => 'failure',
-                'msg' => 'Something went wrong!',
+                'msg' => 'Resource was not found!',
                 'code' => 404
             ];
         }
-        return (new PostResource(Post::find($id)))
+        return (new PostResource(Post::with('categories')->find($id)))
             ->additional([
             'status' => 'success',
             'msg' => '',

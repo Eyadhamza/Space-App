@@ -13,9 +13,9 @@ class PostResource extends JsonResource
             'title' => $this->title,
             'description' => $this->description,
             'image' => $this->imag ?? '',
-            'categories' => CategoryResource::collection( $this->categories()->get()),
+            'categories' => CategoryResource::collection($this->whenLoaded('categories')),
             'user_id' => $this->user->id,
-            'social_links' => $this->social_link ?? '',
+            'social_links' => $this->social_link ?? [],
             'slug' => $this->slug ?? ''
         ];
     }
