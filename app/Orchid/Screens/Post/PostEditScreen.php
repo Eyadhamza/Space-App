@@ -133,18 +133,18 @@ class PostEditScreen extends Screen
     }
     public function createOrUpdate(Post $post, Request $request): RedirectResponse
     {
-        $data=$request->validate([
+        $request->validate([
             'post.title'=>'required|string',
             'post.description'=>'required|string',
             'post.image'=>'nullable',
-            'categories.' => 'nullable',
+            'post.categories.' => 'nullable',
 
         ]);
         $post->fill($request->get('post'))->fill([
             'user_id' => auth()->user()->id
         ]);
-        $post->categories()->sync(request('post.categories'));
         $post->save();
+        $post->categories()->sync(request('post.categories'));
 
         Alert::info('You have successfully updated a post.');
 
